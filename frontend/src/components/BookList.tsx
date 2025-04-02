@@ -1,18 +1,23 @@
-import { use, useEffect, useState } from 'react';
-import { Book } from './types/Books';
+import { useEffect, useState } from 'react';
+import { Book } from '../types/Books';
+import { useNavigate } from 'react-router-dom';
 
-function BookList() {
+function BookList({ selectedCategories }: { selectedCategories: string[] }) {
   const [Books, setBooks] = useState<Book[]>([]);
   const [pageSize, setPageSize] = useState<number>(5);
   const [pageNum, setPageNum] = useState<number>(1);
   const [totalItems, setTotalItems] = useState<number>(0);
   const [totalPages, setTotalPages] = useState<number>(0);
-  const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchBooks = async () => {
+      const categoryParams = selectedCategories.map(
+        (cat) => `bookTypes=${encodeURIComponent(cat)}`
+      );
+
       const response = await fetch(
-        `http://localhost:4000/Book?pageSize=${pageSize}&pageNum=${pageNum}&sortBy=title&sortOrder=${sortOrder}`
+        `http://localhost:4000/Book?pageSize=${pageSize}&pageNum=${pageNum}&${selectedCategories.length ? `&${categoryParams}` : ''}`
       );
       const data = await response.json();
       setBooks(data.books);
@@ -21,21 +26,10 @@ function BookList() {
     };
 
     fetchBooks();
-  }, [pageSize, pageNum, totalItems, sortOrder]);
+  }, [pageSize, pageNum, totalItems, selectedCategories]);
 
   return (
     <>
-      <button
-        className="btn btn-outline-primary mb-3"
-        onClick={() =>
-          setSortOrder((prev) => (prev === 'asc' ? 'desc' : 'asc'))
-        }
-      >
-        Sort by Title ({sortOrder === 'asc' ? 'A-Z' : 'Z-A'})
-      </button>
-
-      <h1>Books</h1>
-      <br />
       {Books.map((b) => (
         <div id="bookCard" className="card" key={b.bookID}>
           <h3 className="card-title">{b.title}</h3>
@@ -70,6 +64,14 @@ function BookList() {
                 {b.price}
               </li>
             </ul>
+            <button
+              className="btn btn-success"
+              onClick={() =>
+                navigate(`/donate/${b.title}/${b.bookID}/${b.price}`)
+              }
+            >
+              Add to Cart
+            </button>
           </div>
         </div>
       ))}
