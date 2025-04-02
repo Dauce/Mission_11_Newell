@@ -6,6 +6,7 @@ import CartSummary from '../components/CartSummary';
 
 function ProjectsPage() {
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [sortByTitle, setSortByTitle] = useState<boolean>(false);
 
   return (
     <>
@@ -20,7 +21,18 @@ function ProjectsPage() {
             />
           </div>
           <div className="col-md-9">
-            <BookList selectedCategories={selectedCategories} />
+            {/* Sort Button */}
+            <button
+              className="btn btn-outline-primary mb-3"
+              onClick={() => setSortByTitle((prev) => !prev)}
+            >
+              {sortByTitle ? 'Clear Sort' : 'Sort Alphabetically by Title'}
+            </button>
+            {/* Pass sort prop down to BookList */}
+            <BookList
+              selectedCategories={selectedCategories}
+              sortByTitle={sortByTitle}
+            />
           </div>
         </div>
       </div>

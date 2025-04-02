@@ -16,20 +16,13 @@ namespace Mission_11_Newell.API.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetBooks(int pageSize = 5, int pageNum = 1, string sortBy = "title", string sortOrder = "asc")
+        public IActionResult GetBooks(int pageSize = 5, int pageNum = 1, [FromQuery] List<string>? bookTypes = null)
         {
             var query = _BookContext.Books.AsQueryable();
 
-            // Normalize sortBy and sortOrder to lowercase
-            sortBy = sortBy.ToLower();
-            sortOrder = sortOrder.ToLower();
-
-            // Apply sorting
-            if (sortBy == "title")
+            if (bookTypes != null && bookTypes.Any())
             {
-                query = sortOrder == "desc"
-                    ? query.OrderByDescending(b => b.Title)
-                    : query.OrderBy(b => b.Title);
+                query = query.Where(b => bookTypes.Contains(b.Category));
             }
 
             // Get total count
@@ -49,6 +42,17 @@ namespace Mission_11_Newell.API.Controllers
             };
 
             return Ok(result);
+            
+        }
+        
+        [HttpGet("GetProjectTypes")]
+        public IActionResult GetProjectTypes ()
+        {
+            var bookTypes = _BookContext.Books
+                .Select(b => b.Category)
+                .Distinct()
+                .ToList();
+            return Ok(bookTypes);
         }
         
     }

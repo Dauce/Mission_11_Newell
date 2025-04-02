@@ -2,7 +2,13 @@ import { useEffect, useState } from 'react';
 import { Book } from '../types/Books';
 import { useNavigate } from 'react-router-dom';
 
-function BookList({ selectedCategories }: { selectedCategories: string[] }) {
+function BookList({
+  selectedCategories,
+  sortByTitle,
+}: {
+  selectedCategories: string[];
+  sortByTitle?: boolean;
+}) {
   const [Books, setBooks] = useState<Book[]>([]);
   const [pageSize, setPageSize] = useState<number>(5);
   const [pageNum, setPageNum] = useState<number>(1);
@@ -20,13 +26,22 @@ function BookList({ selectedCategories }: { selectedCategories: string[] }) {
         `http://localhost:4000/Book?pageSize=${pageSize}&pageNum=${pageNum}&${selectedCategories.length ? `&${categoryParams}` : ''}`
       );
       const data = await response.json();
-      setBooks(data.books);
+
+      let sortedBooks = data.books;
+
+      if (sortByTitle) {
+        sortedBooks = [...sortedBooks].sort((a, b) =>
+          a.title.localeCompare(b.title)
+        );
+      }
+
+      setBooks(sortedBooks);
       setTotalItems(data.totalNumBooks);
       setTotalPages(Math.ceil(totalItems / pageSize));
     };
 
     fetchBooks();
-  }, [pageSize, pageNum, totalItems, selectedCategories]);
+  }, [pageSize, pageNum, totalItems, selectedCategories, sortByTitle]);
 
   return (
     <>
