@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/dawsonnewell/Documents/IS 413/Mission_10_Newell/backend/Mission_10_Newell.API/Mission_11_Newell.API.csproj": {}
+    "/Users/dawsonnewell/Documents/IS 413/Mission_11_Newell/backend/Mission_11_Newell.API/Mission_11_Newell.API.csproj": {}
   },
   "projects": {
-    "/Users/dawsonnewell/Documents/IS 413/Mission_10_Newell/backend/Mission_10_Newell.API/Mission_11_Newell.API.csproj": {
+    "/Users/dawsonnewell/Documents/IS 413/Mission_11_Newell/backend/Mission_11_Newell.API/Mission_11_Newell.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/dawsonnewell/Documents/IS 413/Mission_10_Newell/backend/Mission_10_Newell.API/Mission_11_Newell.API.csproj",
+        "projectUniqueName": "/Users/dawsonnewell/Documents/IS 413/Mission_11_Newell/backend/Mission_11_Newell.API/Mission_11_Newell.API.csproj",
         "projectName": "Mission_11_Newell.API",
-        "projectPath": "/Users/dawsonnewell/Documents/IS 413/Mission_10_Newell/backend/Mission_10_Newell.API/Mission_11_Newell.API.csproj",
+        "projectPath": "/Users/dawsonnewell/Documents/IS 413/Mission_11_Newell/backend/Mission_11_Newell.API/Mission_11_Newell.API.csproj",
         "packagesPath": "/Users/dawsonnewell/.nuget/packages/",
-        "outputPath": "/Users/dawsonnewell/Documents/IS 413/Mission_10_Newell/backend/Mission_10_Newell.API/obj/",
+        "outputPath": "/Users/dawsonnewell/Documents/IS 413/Mission_11_Newell/backend/Mission_11_Newell.API/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/dawsonnewell/.nuget/NuGet/NuGet.Config"
@@ -43,6 +43,14 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.*, )"
+            },
+            "Microsoft.EntityFrameworkCore.Sqlite": {
+              "target": "Package",
+              "version": "[8.*, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.6.2, )"

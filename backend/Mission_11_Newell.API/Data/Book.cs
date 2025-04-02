@@ -1,8 +1,9 @@
 using System.ComponentModel.DataAnnotations;
 
+
 namespace Mission_11_Newell.API.Data;
 
-public class Project
+public class Book
 {
     [Key]
     public int BookID { get; set; }
