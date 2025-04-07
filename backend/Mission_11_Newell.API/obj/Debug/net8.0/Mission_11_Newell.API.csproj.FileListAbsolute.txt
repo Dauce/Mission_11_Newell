@@ -66,3 +66,4 @@
 /Users/dawsonnewell/Documents/IS 413/Mission_11_Newell/backend/Mission_11_Newell.API/bin/Debug/net8.0/runtimes/win-arm64/native/e_sqlite3.dll
 /Users/dawsonnewell/Documents/IS 413/Mission_11_Newell/backend/Mission_11_Newell.API/bin/Debug/net8.0/runtimes/win-x64/native/e_sqlite3.dll
 /Users/dawsonnewell/Documents/IS 413/Mission_11_Newell/backend/Mission_11_Newell.API/bin/Debug/net8.0/runtimes/win-x86/native/e_sqlite3.dll
+/Users/dawsonnewell/Documents/IS 413/Mission_11_Newell/backend/Mission_11_Newell.API/bin/Debug/net8.0/Bookstore.sqlite

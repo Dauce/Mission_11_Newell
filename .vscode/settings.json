@@ -1,0 +1,4 @@
+{
+  "appService.defaultWebAppToDeploy": "undefined/subscriptions/6f89bbb2-a81e-486e-bcea-1a1be4fd69f3/resourceGroups/appsvc_windows_centralus/providers/Microsoft.Web/sites/Mission13Newell",
+  "appService.deploySubpath": "backend/Mission_11_Newell.API/publish"
+}

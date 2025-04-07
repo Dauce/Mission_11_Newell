@@ -15,7 +15,7 @@ namespace Mission_11_Newell.API.Controllers
             _BookContext = temp;
         }
 
-        [HttpGet]
+        [HttpGet ("AllProjects")]
         public IActionResult GetBooks(int pageSize = 5, int pageNum = 1, [FromQuery] List<string>? bookTypes = null)
         {
             var query = _BookContext.Books.AsQueryable();
@@ -53,6 +53,48 @@ namespace Mission_11_Newell.API.Controllers
                 .Distinct()
                 .ToList();
             return Ok(bookTypes);
+        }
+        [HttpPost("AddBook")]
+        public IActionResult AddBook([FromBody] Book newBook)
+        {
+            _BookContext.Books.Add(newBook);
+            _BookContext.SaveChanges();
+            return Ok(newBook);
+        }
+        
+        [HttpPut("UpdateBook/{bookID}")]
+        public IActionResult UpdateBook(int bookID, [FromBody] Book updatedBook)
+        {
+            var existingBook = _BookContext.Books.Find(bookID);
+            
+            existingBook.Title = updatedBook.Title;
+            existingBook.Author = updatedBook.Author;
+            existingBook.Publisher = updatedBook.Publisher;
+            existingBook.ISBN = updatedBook.ISBN;
+            existingBook.Publisher = updatedBook.Publisher;
+            existingBook.Category = updatedBook.Category;
+            existingBook.PageCount = updatedBook.PageCount;
+            existingBook.Price = updatedBook.Price;
+            
+            _BookContext.Books.Update(existingBook);
+            _BookContext.SaveChanges();
+            return Ok(existingBook);
+        }
+
+        
+        [HttpDelete("DeleteBook/{bookID}")]
+        public IActionResult DeleteBook(int bookID)
+        {
+            var book = _BookContext.Books.Find(bookID);
+
+            if (book == null)
+            {
+                return NotFound(new { message = "Book not found." });
+            }
+            
+            _BookContext.Books.Remove(book);
+            _BookContext.SaveChanges();
+            return NoContent();
         }
         
     }
